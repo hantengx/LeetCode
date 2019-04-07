@@ -13,7 +13,7 @@ public:
 		//字符串赋值不需要strcpy()，直接赋值就OK
 		//name=newname;
 	}
-	void disp()
+	void display()
 	{
 		cout<<"name:"<<name<<endl;
 	}
@@ -25,10 +25,10 @@ private:
 int main(int argc, char const *argv[])
 {
 	Animal animal;
-	animal.disp();
+	animal.display();
 
 	Animal monkey("Monkey");
-	monkey.disp();
+	monkey.display();
 
     return	0;
 }

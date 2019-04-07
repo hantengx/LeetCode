@@ -35,8 +35,8 @@ Human::~Human()
 
 void Human::display()
 {
-    cout << "身高：" << height << endl;
-    cout << "体重：" << weight << endl;
+    cout << "high: " << height << endl;
+    cout << "weight: " << weight << endl;
 }
 
 void Human::setNum(int x, int y)
