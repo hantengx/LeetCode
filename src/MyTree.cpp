@@ -1,5 +1,6 @@
 #include<iostream>
 #include<limits>
+#include<vector>
 
 using namespace std;
 
@@ -40,15 +41,48 @@ public:
         
         return isValidBST(root->left, root->val, min) && isValidBST(root->right, max, root->val);
     }
+
+    static bool isSymmetric(TreeNode* left, TreeNode* right) 
+    {
+        if (left == nullptr || right == nullptr)
+        {
+            return left == right;
+        }
+        
+        if (left->val != right->val)
+        {
+            return false;
+        }
+        
+        return isSymmetric(left->left, right->right)&&isSymmetric(left->right, right->left);
+    }
+
+    static vector<vector<int>> levelOrder(TreeNode* root) 
+    {
+        
+    }
+
+    static void foreachList(TreeNode* root, vector<vector<int>> result)
+    {
+        if(root == nullptr)
+        {
+            return;
+        }
+
+        
+    }
 };
 
 int main(int argc, char const *argv[])
 {
     TreeNode * node = new TreeNode(0);
-    node->left = new TreeNode(-1);
-    node->right = new TreeNode(2);
-    node->right->left = new TreeNode(2);
+    node->left = new TreeNode(1);
+    node->right = new TreeNode(1);
+    node->right->right = new TreeNode(2);
+    node->right->left = new TreeNode(3);
+    node->left->left = new TreeNode(2);
+    node->left->right = new TreeNode(3);
 
     // cout << "treeNode deep: " << MyTree::isValidBST(node) << endl;
-    cout << "is valid bst: " << MyTree::isValidBST(node, LONG_MAX, LONG_MIN) << endl;
+    cout << "is valid bst: " << MyTree::isSymmetric(node, node) << endl;
 }
