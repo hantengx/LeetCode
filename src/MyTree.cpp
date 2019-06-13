@@ -1,5 +1,6 @@
 #include<iostream>
 #include<limits>
+#include<vector>
 
 using namespace std;
 
@@ -40,6 +41,35 @@ public:
         
         return isValidBST(root->left, root->val, min) && isValidBST(root->right, max, root->val);
     }
+
+    static vector<vector<int>> levelOrder(TreeNode* root) 
+    {
+        auto l = new vector<vector<int>>();
+        auto l2 = new vector<int>();
+        l->push_back(*l2);
+        addValue(root, l, l2);
+        return *l;
+    }
+
+    static void addValue(TreeNode * root, vector<vector<int>>* l, vector<int> *l2)
+    {
+        if(root == nullptr)
+        {
+            return;
+        }
+        if(root->left != nullptr)
+        {
+            l2->push_back(root->left->val);
+        }
+        if(root->right != nullptr)
+        {
+            l2->push_back(root->right->val);
+        }
+
+        l2 = new vector<int>();
+        addValue(root->left, l, l2);
+        addValue(root->right, l, l2);
+    }
 };
 
 int main(int argc, char const *argv[])
@@ -50,5 +80,7 @@ int main(int argc, char const *argv[])
     node->right->left = new TreeNode(2);
 
     // cout << "treeNode deep: " << MyTree::isValidBST(node) << endl;
-    cout << "is valid bst: " << MyTree::isValidBST(node, LONG_MAX, LONG_MIN) << endl;
+    // cout << "is valid bst: " << MyTree::isValidBST(node, LONG_MAX, LONG_MIN) << endl;
+    MyTree::levelOrder(node);
+    return 0;
 }
