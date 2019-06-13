@@ -42,16 +42,31 @@ public:
         return isValidBST(root->left, root->val, min) && isValidBST(root->right, max, root->val);
     }
 
-    static vector<vector<int>> levelOrder(TreeNode* root) 
+    static bool isSymmetric(TreeNode* left, TreeNode* right) 
     {
-        auto l = new vector<vector<int>>();
-        auto l2 = new vector<int>();
-        l->push_back(*l2);
-        addValue(root, l, l2);
-        return *l;
+        if (left == nullptr || right == nullptr)
+        {
+            return left == right;
+        }
+        
+        if (left->val != right->val)
+        {
+            return false;
+        }
+        
+        return isSymmetric(left->left, right->right)&&isSymmetric(left->right, right->left);
     }
 
-    static void addValue(TreeNode * root, vector<vector<int>>* l, vector<int> *l2)
+	static vector<vector<int>> levelOrder(TreeNode* root)
+	{
+		auto l = new vector<vector<int>>();
+		auto l2 = new vector<int>();
+		l->push_back(*l2);
+		addValue(root, l, l2);
+		return *l;
+	}
+
+	static void addValue(TreeNode * root, vector<vector<int>>* l, vector<int> *l2)
     {
         if(root == nullptr)
         {
@@ -75,9 +90,12 @@ public:
 int main(int argc, char const *argv[])
 {
     TreeNode * node = new TreeNode(0);
-    node->left = new TreeNode(-1);
-    node->right = new TreeNode(2);
-    node->right->left = new TreeNode(2);
+    node->left = new TreeNode(1);
+    node->right = new TreeNode(1);
+    node->right->right = new TreeNode(2);
+    node->right->left = new TreeNode(3);
+    node->left->left = new TreeNode(2);
+    node->left->right = new TreeNode(3);
 
     // cout << "treeNode deep: " << MyTree::isValidBST(node) << endl;
     // cout << "is valid bst: " << MyTree::isValidBST(node, LONG_MAX, LONG_MIN) << endl;
