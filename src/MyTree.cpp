@@ -42,60 +42,44 @@ public:
         return isValidBST(root->left, root->val, min) && isValidBST(root->right, max, root->val);
     }
 
-    static bool isSymmetric(TreeNode* left, TreeNode* right) 
-    {
-        if (left == nullptr || right == nullptr)
-        {
-            return left == right;
-        }
-        
-        if (left->val != right->val)
-        {
-            return false;
-        }
-        
-        return isSymmetric(left->left, right->right)&&isSymmetric(left->right, right->left);
-    }
-
+    // 给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。
 	static vector<vector<int>> levelOrder(TreeNode* root)
 	{
 		auto l = new vector<vector<int>>();
-		auto l2 = new vector<int>();
-		l->push_back(*l2);
-		addValue(root, l, l2);
+		addValue(root, l, 0);
 		return *l;
 	}
 
-	static void addValue(TreeNode * root, vector<vector<int>>* l, vector<int> *l2)
-    {
-        if(root == nullptr)
-        {
-            return;
-        }
-        if(root->left != nullptr)
-        {
-            l2->push_back(root->left->val);
-        }
-        if(root->right != nullptr)
-        {
-            l2->push_back(root->right->val);
-        }
+	//深度优先搜索（fds），先序遍历，
+	static void addValue(TreeNode* root, vector<vector<int>>* l, int level)
+	{
+		if (root == nullptr)
+		{
+			return;
+		}
+		if (l->size() == level)
+		{
+			l->push_back(vector<int>());
+		}
+		l->at(level).push_back(root->val);
+		level++;
+		addValue(root->left, l, level);
+		addValue(root->right, l, level);
+	}
 
-        l2 = new vector<int>();
-        addValue(root->left, l, l2);
-        addValue(root->right, l, l2);
-    }
+    //将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。
+	TreeNode* sortedArrayToBST(vector<int>& nums) 
+	{
+        return nullptr;
+	}
 };
 
 int main(int argc, char const *argv[])
 {
     TreeNode * node = new TreeNode(0);
-    node->left = new TreeNode(1);
-    node->right = new TreeNode(1);
-    node->right->right = new TreeNode(2);
-    node->right->left = new TreeNode(3);
-    node->left->left = new TreeNode(2);
-    node->left->right = new TreeNode(3);
+    node->left = new TreeNode(-1);
+    node->right = new TreeNode(2);
+    node->right->left = new TreeNode(2);
 
     // cout << "treeNode deep: " << MyTree::isValidBST(node) << endl;
     // cout << "is valid bst: " << MyTree::isValidBST(node, LONG_MAX, LONG_MIN) << endl;
