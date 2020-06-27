@@ -12,7 +12,8 @@
 
 using namespace std;
 
-class MergeList {
+class MergeList
+    {
 public:
     struct ListNode 
     {
@@ -51,9 +52,13 @@ public:
         
         return tmp->next;
     }
+
+    static MergeList::ListNode* getList(int length);
+    static void print(MergeList::ListNode * head);
+    static int test(int argc, char const *argv[]);
 };
 
-MergeList::ListNode* getList(int length)
+MergeList::ListNode* MergeList::getList(int length)
 {
     auto head = new MergeList::ListNode(rand() % 10);;
     auto tmp = head;
@@ -68,7 +73,7 @@ MergeList::ListNode* getList(int length)
     return head;
 }
 
-void print(MergeList::ListNode * head)
+void MergeList::print(MergeList::ListNode * head)
 {
     while(head != nullptr)
     {
@@ -78,7 +83,7 @@ void print(MergeList::ListNode * head)
     cout << endl;
 }
 
-int main(int argc, char const *argv[])
+int MergeList::test(int argc, char const *argv[])
 {
     srand(time(0));
     auto l1 = getList(10);

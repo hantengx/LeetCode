@@ -15,6 +15,7 @@ public:
 
     void display();
     void setNum(int x, int y);
+    static int test();
 };
 
 Human::Human()
@@ -45,7 +46,7 @@ void Human::setNum(int x, int y)
     height = y;
 }
 
-int main(int argc, char const *argv[])
+int Human::test()
 {
     Human zhangsan;
     Human lisi(50, 165);

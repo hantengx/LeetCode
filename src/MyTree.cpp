@@ -68,21 +68,58 @@ public:
 	}
 
     //将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。
-	TreeNode* sortedArrayToBST(vector<int>& nums) 
-	{
-        return nullptr;
-	}
+    //bst的定义，左子树小于跟节点小于右子树
+    static TreeNode* sortedArrayToBST(const vector<int>& nums)
+    {
+        if(nums.size() == 0)
+        {
+            return nullptr;
+        }
+        return SetNode(nums, 0, nums.size() - 1);
+    }
+
+    static TreeNode* SetNode(const vector<int>& nums, int startIndex, int endIndex)
+    {
+        int midIndex = (startIndex + endIndex) / 2;
+        auto node = new TreeNode(nums[midIndex]);
+        if (startIndex < midIndex)
+        {
+            node -> left = SetNode(nums, startIndex, midIndex - 1);
+        }
+        if (midIndex < endIndex)
+        {
+            node -> right = SetNode(nums, midIndex + 1, endIndex);
+        }
+        return node;
+    }
 };
 
-int main(int argc, char const *argv[])
+void print(vector<vector<int>> list)
 {
-    TreeNode * node = new TreeNode(0);
-    node->left = new TreeNode(-1);
-    node->right = new TreeNode(2);
-    node->right->left = new TreeNode(2);
+    for (auto &&i : list)
+    {
+        for (auto &&j : i)
+        {
+            cout << j << ", ";
+        }
+        cout << endl;
+    }
+}
+
+int test(int argc, char const *argv[])
+{
+    // TreeNode * node = new TreeNode(0);
+    // node->left = new TreeNode(-1);
+    // node->right = new TreeNode(2);
+    // node->right->left = new TreeNode(2);
+    // node->right->right = new TreeNode(-2);
 
     // cout << "treeNode deep: " << MyTree::isValidBST(node) << endl;
     // cout << "is valid bst: " << MyTree::isValidBST(node, LONG_MAX, LONG_MIN) << endl;
-    MyTree::levelOrder(node);
+    // auto list = MyTree::levelOrder(node);
+    // print(list);
+//    auto list = {-10,-3,0,5,9};
+//    auto root = MyTree::sortedArrayToBST(list);
+    
     return 0;
 }
