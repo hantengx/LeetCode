@@ -9,6 +9,7 @@
 #include "string/CountAndSay.h"
 #include "SingleLinked.h"
 #include "MyTree.h"
+#include "MyArray.h"
 
 
 //#include "MaxProfit.cpp"
@@ -120,9 +121,10 @@ int main()
 {
 	std::cout << "Hello, World!" << std::endl;
 	clock_t startTime = clock();
-	test();
-    auto list = {-1, 0};
-    auto tree =  MyTree::sortedArrayToBST(list);
+//	test();
+//    auto list = {-1, 0};
+//    auto tree =  MyTree::sortedArrayToBST(list);
+    MyArray::Test();
 	clock_t endTime = clock();
 	cout << "total time: " << (double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << endl;
 //	cin.get();

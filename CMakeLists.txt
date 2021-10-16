@@ -14,4 +14,4 @@ add_executable(LeetCode
         src/MyTree.cpp
         src/RemoveDuplicate.cpp
         src/RemoveDuplicate.h
-        src/main.cpp)
+        src/main.cpp src/MyArray.cpp src/MyArray.h)
