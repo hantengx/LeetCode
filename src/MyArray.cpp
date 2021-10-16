@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <vector>
 #include "MyArray.h"
 using namespace std;
 
@@ -21,6 +22,23 @@ int MyArray::removeDuplicates(vector<int> &nums) {
     }
 
     return slow;
+}
+
+int MyArray::MaxProfit(vector<int> &prices) {
+    auto sum = 0;
+    if (prices.size() <= 1)
+    {
+        return sum;
+    }
+
+    for (int i = 1; i < prices.size(); ++i) {
+        auto delta = prices[i] - prices[i - 1];
+        if (delta > 0){
+            sum += delta;
+        }
+    }
+
+    return sum;
 }
 
 void MyArray::Test() {
