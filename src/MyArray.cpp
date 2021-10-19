@@ -145,6 +145,33 @@ vector<int> MyArray::plusOne(vector<int> &digits) {
     return digits;
 }
 
+void MyArray::moveZeroes(vector<int> &nums) {
+    int l = 0, r = 0;
+    while (r < nums.size()){
+        if (nums[r] != 0){
+            int tmp = nums[l];
+            nums[l] = nums[r];
+            nums[r] = tmp;
+            ++l;
+        }
+        ++r;
+    }
+}
+
+vector<int> MyArray::twoSum(vector<int> &nums, int target) {
+    unordered_map<int, int> hp;
+    for (int i = 0; i < nums.size(); ++i) {
+        auto it = hp.find(target - nums[i]);
+        if (it == hp.end()){
+            hp.insert(make_pair(nums[i], i));
+        }else{
+            return {i, it->second};
+        }
+    }
+
+    return {};
+}
+
 void MyArray::Test() {
     auto array = new MyArray();
 //    auto vector = new std::vector<int>{0,1,1,2,2};
