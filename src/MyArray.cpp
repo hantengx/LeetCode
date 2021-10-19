@@ -8,7 +8,9 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <algorithm>
+#include <bitset>
 #include "MyArray.h"
+
 using namespace std;
 
 int MyArray::removeDuplicates(vector<int> &nums) {
@@ -30,14 +32,13 @@ int MyArray::removeDuplicates(vector<int> &nums) {
 
 int MyArray::MaxProfit(vector<int> &prices) {
     auto sum = 0;
-    if (prices.size() <= 1)
-    {
+    if (prices.size() <= 1) {
         return sum;
     }
 
     for (int i = 1; i < prices.size(); ++i) {
         auto delta = prices[i] - prices[i - 1];
-        if (delta > 0){
+        if (delta > 0) {
             sum += delta;
         }
     }
@@ -47,8 +48,7 @@ int MyArray::MaxProfit(vector<int> &prices) {
 
 void MyArray::Rotate(vector<int> &nums, int k) {
     auto len = nums.size();
-    if (len <= 1 || k % len == 0)
-    {
+    if (len <= 1 || k % len == 0) {
         return;
     }
 
@@ -76,15 +76,14 @@ bool MyArray::containsDuplicate(vector<int> &nums) {
 //    }
 //    return false;
     auto len = nums.size();
-    if (len <= 1){
+    if (len <= 1) {
         return false;
     }
     auto flag = new unordered_set<int>();
     for (int i = 0; i < len; ++i) {
-        if (flag->find(nums[i]) == flag->end()){
+        if (flag->find(nums[i]) == flag->end()) {
             flag->insert(nums[i]);
-        }
-        else{
+        } else {
             return true;
         }
     }
@@ -93,15 +92,15 @@ bool MyArray::containsDuplicate(vector<int> &nums) {
 
 int MyArray::singleNumber(vector<int> &nums) {
     auto result = 0;
-    for (auto &num:nums) {
+    for (auto &num: nums) {
         result ^= num;
     }
     return result;
 }
 
 vector<int> MyArray::intersect(vector<int> &nums1, vector<int> &nums2) {
-    if (nums1.size() > nums2.size()){
-        return intersect(nums2,nums1);
+    if (nums1.size() > nums2.size()) {
+        return intersect(nums2, nums1);
     }
     unordered_map<int, int> flag;
     vector<int> result;
@@ -114,11 +113,11 @@ vector<int> MyArray::intersect(vector<int> &nums1, vector<int> &nums2) {
 //            result.push_back(num);
 //        }
 //    }
-    for (auto &num:nums2) {
-        if (flag.count(num) > 0){
+    for (auto &num: nums2) {
+        if (flag.count(num) > 0) {
             --flag[num];
             result.push_back(num);
-            if (flag[num] == 0){
+            if (flag[num] == 0) {
                 flag.erase(num);
             }
         }
@@ -129,17 +128,17 @@ vector<int> MyArray::intersect(vector<int> &nums1, vector<int> &nums2) {
 
 vector<int> MyArray::plusOne(vector<int> &digits) {
     auto tmp = 1;
-    for (int i = digits.size() - 1; i >= 0 ; --i) {
+    for (int i = digits.size() - 1; i >= 0; --i) {
         digits[i] += tmp;
         tmp = digits[i] / 10;
         if (tmp > 0) {
             digits[i] %= 10;
-        }else{
+        } else {
             break;
         }
     }
 
-    if (tmp > 0){
+    if (tmp > 0) {
         digits.insert(digits.begin(), tmp);
     }
     return digits;
@@ -147,8 +146,8 @@ vector<int> MyArray::plusOne(vector<int> &digits) {
 
 void MyArray::moveZeroes(vector<int> &nums) {
     int l = 0, r = 0;
-    while (r < nums.size()){
-        if (nums[r] != 0){
+    while (r < nums.size()) {
+        if (nums[r] != 0) {
             int tmp = nums[l];
             nums[l] = nums[r];
             nums[r] = tmp;
@@ -162,9 +161,9 @@ vector<int> MyArray::twoSum(vector<int> &nums, int target) {
     unordered_map<int, int> hp;
     for (int i = 0; i < nums.size(); ++i) {
         auto it = hp.find(target - nums[i]);
-        if (it == hp.end()){
+        if (it == hp.end()) {
             hp.insert(make_pair(nums[i], i));
-        }else{
+        } else {
             return {i, it->second};
         }
     }
@@ -172,14 +171,67 @@ vector<int> MyArray::twoSum(vector<int> &nums, int target) {
     return {};
 }
 
+bool MyArray::isValidSudoku(vector<vector<char>> &board) {
+    bitset<10> flag;
+    for (int l = 0; l < 9; ++l) {
+        flag.reset();
+        for (int i = 0; i < 9; ++i) {
+            //every line
+            char num = board[l][i];
+            if (num == '.') {
+                continue;
+            }
+            num -= '0';
+            if (flag[num] != 0) {
+                return false;
+            } else {
+                flag.set(num);
+            }
+        }
+    }
+    //every colum
+    for (int col = 0; col < 9; ++col) {
+        flag.reset();
+        for (int i = 0; i < 9; ++i) {
+            char num = board[i][col];
+            if (num == '.') {
+                continue;
+            }
+            num -= '0';
+            if (flag[num] != 0) {
+                return false;
+            } else {
+                flag.set(num);
+            }
+        }
+    }
+    for (int j = 0; j < 9; ++j) {
+        flag.reset();
+        for (int i = 0; i < 9; ++i) {
+            char num = board[(j % 3) * 3 + i / 3][i % 3 + (j / 3) * 3];
+            if (num == '.') {
+                continue;
+            }
+            num -= '0';
+            if (flag[num] != 0) {
+                return false;
+            } else {
+                flag.set(num);
+            }
+        }
+    }
+    return true;
+}
+
+
 void MyArray::Test() {
     auto array = new MyArray();
 //    auto vector = new std::vector<int>{0,1,1,2,2};
 //    auto len = array->removeDuplicates(*vector);
 //    auto vector = new std::vector<int>{1,2,3,4,5,6,7};
 //    array->Rotate(*vector, 3);
-    auto vector1 = new std::vector<int>{4,9,5};
-    auto vector2 = new std::vector<int>{9,4,9,8,4};
+    auto vector1 = new std::vector<int>{4, 9, 5};
+    auto vector2 = new std::vector<int>{9, 4, 9, 8, 4};
     auto result = array->intersect(*vector1, *vector2);
 //    cout << "array length: " << len << endl;
 }

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
-#include <bitset>
 #include "string/ReverseInteger.h"
 #include "string/FirstUniqChar.h"
 #include "string/IsPalindrome.h"
@@ -16,74 +15,6 @@
 //#include "Rotate.cpp"
 
 using namespace std;
-
-bool isValidSudoku(vector<vector<char>>& board)
-{
-    bitset<10> flag;
-    for (int l = 0; l < 9; ++l)
-    {
-        flag.reset();
-        for (int i = 0; i < 9; ++i)
-        {
-            //every line
-            char num = board[l][i];
-            if(num == '.')
-            {
-                continue;
-            }
-            num -= '0';
-            if (flag[num] != 0)
-            {
-                return false;
-            } else
-            {
-                flag.set(num);
-            }
-        }
-    }
-    //every colum
-    for (int col = 0; col < 9; ++col)
-    {
-        flag.reset();
-        for (int i = 0; i < 9; ++i)
-        {
-            char num = board[i][col];
-            if(num == '.')
-            {
-                continue;
-            }
-            num -= '0';
-            if (flag[num] != 0)
-            {
-                return false;
-            } else
-            {
-                flag.set(num);
-            }
-        }
-    }
-    for (int j = 0; j < 9; ++j)
-    {
-        flag.reset();
-        for (int i = 0; i < 9; ++i)
-        {
-            char num = board[(j % 3) * 3 + i / 3][i % 3 + (j / 3) * 3];
-            if(num == '.')
-            {
-                continue;
-            }
-            num -= '0';
-            if (flag[num] != 0)
-            {
-                return false;
-            } else
-            {
-                flag.set(num);
-            }
-        }
-    }
-    return true;
-}
 
 void test()
 {
