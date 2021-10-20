@@ -172,52 +172,23 @@ vector<int> MyArray::twoSum(vector<int> &nums, int target) {
 }
 
 bool MyArray::isValidSudoku(vector<vector<char>> &board) {
-    bitset<10> flag;
-    for (int l = 0; l < 9; ++l) {
-        flag.reset();
-        for (int i = 0; i < 9; ++i) {
-            //every line
-            char num = board[l][i];
-            if (num == '.') {
+    int size = board.size();
+    auto rowFlag = new int[9][9];
+    auto columnFlag = new int[9][9];
+    auto gridFlag = new int[9][9];
+
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            char num = board[i][j];
+            if (num == '.'){
                 continue;
             }
-            num -= '0';
-            if (flag[num] != 0) {
-                return false;
-            } else {
-                flag.set(num);
+
+            int k = i / 3 * 3 + j / 3;
+            if (rowFlag[i][num] == 1 || columnFlag[j][num] == 1 || gridFlag[k][num] == 1){
+                return  false;
             }
-        }
-    }
-    //every colum
-    for (int col = 0; col < 9; ++col) {
-        flag.reset();
-        for (int i = 0; i < 9; ++i) {
-            char num = board[i][col];
-            if (num == '.') {
-                continue;
-            }
-            num -= '0';
-            if (flag[num] != 0) {
-                return false;
-            } else {
-                flag.set(num);
-            }
-        }
-    }
-    for (int j = 0; j < 9; ++j) {
-        flag.reset();
-        for (int i = 0; i < 9; ++i) {
-            char num = board[(j % 3) * 3 + i / 3][i % 3 + (j / 3) * 3];
-            if (num == '.') {
-                continue;
-            }
-            num -= '0';
-            if (flag[num] != 0) {
-                return false;
-            } else {
-                flag.set(num);
-            }
+            rowFlag[i][num] = columnFlag[j][num] = gridFlag[k][num] = 1;
         }
     }
     return true;
