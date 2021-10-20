@@ -194,6 +194,40 @@ bool MyArray::isValidSudoku(vector<vector<char>> &board) {
     return true;
 }
 
+void MyArray::rotate(vector<vector<int>> &matrix) {
+    int n = matrix.size();
+    for (int k = 0; k < n / 2; ++k) {
+        for (int l = k; l < n - k - 1; ++l) {
+            int x = k, y = l;
+            auto original = matrix[x][y];
+            do{
+                auto tmpIndex = x;
+                x = y;
+                y = n - 1 - tmpIndex;
+                auto tmp = matrix[x][y];
+                matrix[x][y] = original;
+                original = tmp;
+
+            }while(x != k || y != l);
+        }
+    }
+}
+
+void MyArray::rotate2(vector<vector<int>> &matrix) {
+    auto n = matrix.size();
+    for (int i = 0; i < n / 2; ++i) {
+        for (int j = 0; j < n; ++j) {
+            swap(matrix[i][j], matrix[n- 1 -i][j]);
+        }
+    }
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            swap(matrix[j][i],matrix[i][j]);
+        }
+    }
+}
+
 
 void MyArray::Test() {
     auto array = new MyArray();

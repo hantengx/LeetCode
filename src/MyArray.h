@@ -50,6 +50,10 @@ public:
     //一个有效的数独（部分已被填充）不一定是可解的。
     //只需要根据以上规则，验证已经填入的数字是否有效即可
     bool isValidSudoku(vector<vector<char>>& board);
+    //给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。
+    //你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。
+    void rotate(vector<vector<int>>& matrix);
+    void rotate2(vector<vector<int>>& matrix);
 };
 
 
