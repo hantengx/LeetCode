@@ -9,8 +9,10 @@
 
 class MySearch {
 public:
-    void dfs(TreeNode* root);
-    void bfs(TreeNode* root);
+    static vector<int> dfs_stack(TreeNode* root);
+    static void dfs(TreeNode* root, vector<int> &result);
+    static vector<int> bfs(TreeNode* root);
+    static void test();
 };
 
 

@@ -48,7 +48,10 @@ void MyMatrix::dp(vector<vector<int>> &matrix, unordered_set<int> &visited, int 
             continue;
         }
         dp(matrix, visited, i, current + step, min);
-        cout << "dst " << dst << " shortest path: " << min << endl;
+        auto iter = visited.find(i);
+        if (iter != visited.end()){
+            visited.erase(iter);
+        }
     }
 }
 
@@ -58,7 +61,7 @@ void MyMatrix::Test() {
         {50, 0, 0, 0, 0},
         {30, 5, 0, 0, 0},
         {100, 20, 50, 0, 0},
-        {10, -1, -1, 10, 0}};
+        {10, 1, -1, 10, 0}};
 
     MyMatrix myMatrix;
     unordered_set<int> visited;
@@ -67,6 +70,7 @@ void MyMatrix::Test() {
         int min = 1000;
         visited.clear();
         myMatrix.dp(matrix, visited, i, 0, min);
+        cout << "dst " << i + 1 << " shortest path: " << min << endl;
         if (min > max){
             max = min;
         }
