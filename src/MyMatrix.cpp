@@ -6,26 +6,6 @@
 #include <iostream>
 #include "MyMatrix.h"
 
-void MyMatrix::ShortestPath(vector<vector<int>> &matrix) {
-    vector<int> distance;
-    int size = matrix.size();
-    for (int i = 1; i < size; ++i) {
-        distance[i] = matrix[i][0];
-        auto tmp = distance[i];
-        queue<int> queue;
-        queue.push(i);
-        while (tmp < distance[i] && tmp > 0){
-            auto dst = queue.front();
-            for (int j = i + 1; j < size; ++j) {
-                if (matrix[j][dst] < tmp){
-                    queue.push(j);
-                    tmp-= matrix[j][i];
-                }
-            }
-        }
-    }
-}
-
 void MyMatrix::dp(vector<vector<int>> &matrix, unordered_set<int> &visited, int dst, int current, int& min) {
     if (dst == 0){
         min = current;
@@ -55,11 +35,56 @@ void MyMatrix::dp(vector<vector<int>> &matrix, unordered_set<int> &visited, int 
     }
 }
 
+void MyMatrix::dijkstra(vector<vector<int>> &matrix) {
+    vector<int> distance;
+    int size = matrix.size();
+    for (int i = 0; i < size; ++i) {
+        int tmp = matrix[i][0];
+        if (tmp < 0){
+            tmp = INT32_MAX;
+        }
+        distance.push_back(tmp);
+    }
+
+    unordered_set<int> visited;
+    visited.insert(0);
+    int dst = 0;
+    while (visited.size() != size){
+        int minIndex = 0;
+        int min = INT32_MAX;
+        for (int i = 0; i < size; ++i) {
+            if (visited.find(i) != visited.end()){
+                continue;
+            }
+            int step = 0;
+            if (dst > i){
+                step = matrix[dst][i];
+            } else {
+                step = matrix[i][dst];
+            }
+            if (step > 0 && step + distance[dst] < distance[i]){
+                distance[i] = step + distance[dst];
+            }
+
+            if (distance[i] < min){
+                minIndex = i;
+                min = distance[i];
+            }
+        }
+        visited.insert(minIndex);
+        dst = minIndex;
+    }
+
+    for (int i = 0; i < size; ++i) {
+        cout << "city: " << i + 1 << ", distance: " << distance[i] << endl;
+    }
+}
+
 void MyMatrix::Test() {
     auto matrix = vector<vector<int>>{
         {0, 0, 0, 0, 0},
         {50, 0, 0, 0, 0},
-        {30, 5, 0, 0, 0},
+        {10, 5, 0, 0, 0},
         {100, 20, 50, 0, 0},
         {10, 1, -1, 10, 0}};
 
@@ -77,4 +102,5 @@ void MyMatrix::Test() {
     }
 
     cout << "shortest path: " << max << endl;
+    dijkstra(matrix);
 }

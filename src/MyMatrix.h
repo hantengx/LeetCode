@@ -12,8 +12,8 @@ using namespace std;
 
 class MyMatrix {
 public:
-    void ShortestPath(vector<vector<int>> &matrix);
     void dp(vector<vector<int>> &matrix, unordered_set<int> &visited, int dst, int current, int& min);
+    static void dijkstra(vector<vector<int>> &matrix);
     static void Test();
 };
 
