@@ -35,6 +35,7 @@ void MyMatrix::dp(vector<vector<int>> &matrix, unordered_set<int> &visited, int 
     }
 }
 
+//TODO:拆分两个数组，一个是找到最短路径的点，一个是未找到最短路径的点
 void MyMatrix::dijkstra(vector<vector<int>> &matrix) {
     vector<int> distance;
     int size = matrix.size();
@@ -103,4 +104,21 @@ void MyMatrix::Test() {
 
     cout << "shortest path: " << max << endl;
     dijkstra(matrix);
+}
+
+//右上角，一行的最大值，一列的最小值，每次排除一行和一列
+bool MyMatrix::searchMatrix(vector<vector<int>> &matrix, int target) {
+    int m = matrix.size(), n = matrix[0].size();
+    int x = 0, y = n - 1;
+    while (x < m && y >= 0){
+        if (target < matrix[x][y]){
+            --y;
+        } else if(target == matrix[x][y]) {
+            return true;
+        } else {
+            ++x;
+        }
+    }
+
+    return false;
 }
