@@ -14,4 +14,4 @@ add_executable(LeetCode
         src/MyTree.cpp
         src/RemoveDuplicate.cpp
         src/RemoveDuplicate.h
-        src/main.cpp src/MyArray.cpp src/MyArray.h src/MyMatrix.cpp src/MyMatrix.h src/MySearch.cpp src/MySearch.h src/MyVector.cpp src/MyVector.h)
+        src/main.cpp src/MyArray.cpp src/MyArray.h src/MyMatrix.cpp src/MyMatrix.h src/MySearch.cpp src/MySearch.h src/MyVector.cpp src/MyVector.h src/MyString.cpp src/MyString.h)
