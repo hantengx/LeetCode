@@ -54,6 +54,8 @@ public:
     //你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。
     void rotate(vector<vector<int>>& matrix);
     void rotate2(vector<vector<int>>& matrix);
+    //斐波那契数列，f(1) = 1, f(2) = 1, f(n) = f(n - 1) + f(n - 2)
+    int Fib(int n);
 };
 
 

@@ -57,8 +57,8 @@ int main()
 //	test();
 //    auto list = {-1, 0};
 //    auto tree =  MyTree::sortedArrayToBST(list);
-//    MyArray::Test();
-    MyMatrix::Test();
+    MyArray::Test();
+//    MyMatrix::Test();
 //    MySearch::test();
 	clock_t endTime = clock();
 	cout << "total time: " << (double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << endl;

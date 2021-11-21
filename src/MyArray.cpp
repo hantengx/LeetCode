@@ -228,6 +228,23 @@ void MyArray::rotate2(vector<vector<int>> &matrix) {
     }
 }
 
+int MyArray::Fib(int n) {
+    //递归，逻辑简单，效率低下
+//    if (n == 1 || n == 2){
+//        return 1;
+//    }
+//
+//    return Fib(n - 1) + Fib(n - 2);
+////////////////////////////////////
+//递推，使用空间换时间，时间复杂度O(n)
+    int nums[n];
+    nums[0] = nums[1] = 1;
+    for (int i = 2; i < n; ++i) {
+        nums[i] = nums[i - 1] + nums[i - 2];
+    }
+
+    return nums[n - 1];
+}
 
 void MyArray::Test() {
     auto array = new MyArray();
@@ -235,8 +252,10 @@ void MyArray::Test() {
 //    auto len = array->removeDuplicates(*vector);
 //    auto vector = new std::vector<int>{1,2,3,4,5,6,7};
 //    array->Rotate(*vector, 3);
-    auto vector1 = new std::vector<int>{4, 9, 5};
-    auto vector2 = new std::vector<int>{9, 4, 9, 8, 4};
-    auto result = array->intersect(*vector1, *vector2);
+//    auto vector1 = new std::vector<int>{4, 9, 5};
+//    auto vector2 = new std::vector<int>{9, 4, 9, 8, 4};
+//    auto result = array->intersect(*vector1, *vector2);
+    auto result = array->Fib(42);
+    cout << "result: " << result << endl;
 //    cout << "array length: " << len << endl;
 }
