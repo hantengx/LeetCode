@@ -2,6 +2,7 @@
 // Created by hante on 2019/6/13.
 //
 
+#include <deque>
 #include "MyTree.h"
 
 int MyTree::CountDeep(TreeNode *root, int deep)
@@ -38,6 +39,30 @@ vector<vector<int>> MyTree::levelOrder(TreeNode *root)
     auto l = new vector<vector<int>>();
     addValue(root, l, 0);
     return *l;
+// 广度优先搜索，一次取一层
+//    auto result = new vector<vector<int>>();
+//    if (!root){
+//        return *result;
+//    }
+//    deque<TreeNode*> queue;
+//    queue.push_back(root);
+//    while (!queue.empty()){
+//        auto size = queue.size();
+//        vector<int> row;
+//        for (int i = 0; i < size; ++i) {
+//            TreeNode* node = queue.front();
+//            queue.pop_front();
+//            row.push_back(node->val);
+//            if (node->left){
+//                queue.push_back(node->left);
+//            }
+//            if (node->right){
+//                queue.push_back(node->right);
+//            }
+//        }
+//        result->push_back(row);
+//    }
+//    return *result;
 }
 
 //深度优先搜索（fds），先序遍历，
